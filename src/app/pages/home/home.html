@@ -20,43 +20,48 @@
         <!-- Formulário de Configuração -->
         <!-- O evento (ngSubmit) chama a função gerarNumeros() quando o formulário é enviado -->
         <form (ngSubmit)="gerarNumeros()" class="numeros-form">
-          <!-- Campo 1: Número Máximo -->
-          <!-- O appearance="outline" cria a borda ao redor do campo -->
-          <!-- O mat-label flutuará para cima quando o campo for focado ou preenchido -->
-          <mat-form-field appearance="outline" class="quantidade-field">
-            <mat-label>Número máximo permitido</mat-label>
-            <!-- Input com valor mínimo 1 -->
-            <input 
-              matInput 
-              type="number" 
-              [(ngModel)]="quantidadeMaxima" 
-              name="maximo"
-              min="1"
-              required
-              placeholder="Digite o número máximo"
-              (ngModelChange)="onQuantidadeMaximaChange()">
-            <!-- Altere a mensagem de ajuda abaixo conforme necessário -->
-            <mat-hint>Maior número que pode ser sorteado (ex: 60 para Mega-Sena)</mat-hint>
-          </mat-form-field>
+          <!-- Container para os campos do formulário -->
+          <div class="form-fields-container">
+            <!-- Campo 1: Número Máximo -->
+            <!-- O appearance="outline" cria a borda ao redor do campo -->
+            <!-- O mat-label flutuará para cima quando o campo for focado ou preenchido -->
+            <mat-form-field appearance="outline" class="quantidade-field">
+              <mat-label>Número máximo permitido</mat-label>
+              <!-- Input com valor mínimo 1 -->
+              <input 
+                matInput 
+                type="number" 
+                [(ngModel)]="quantidadeMaxima" 
+                name="maximo"
+                min="1"
+                required
+                placeholder="Digite o número máximo"
+                (ngModelChange)="onQuantidadeMaximaChange()">
+              <mat-icon matSuffix>casino</mat-icon>
+              <!-- Altere a mensagem de ajuda abaixo conforme necessário -->
+              <mat-hint>Maior número que pode ser sorteado (ex: 60 para Mega-Sena)</mat-hint>
+            </mat-form-field>
 
-          <!-- Campo 2: Quantidade de Números -->
-          <!-- Este campo define quantos números serão sorteados -->
-          <mat-form-field appearance="outline" class="quantidade-field">
-            <mat-label>Quantidade de números a gerar</mat-label>
-            <!-- Input com valor mínimo 1 e máximo dinâmico -->
-            <input 
-              matInput 
-              type="number" 
-              [(ngModel)]="quantidadeNumeros" 
-              name="quantidade"
-              min="1"
-              [max]="quantidadeMaxima ?? null"
-              required
-              placeholder="Digite a quantidade de números"
-              [disabled]="!quantidadeMaxima">
-            <!-- Mensagem de ajuda dinâmica que usa o valor máximo atual -->
-            <mat-hint>Digite um número entre 1 e {{ quantidadeMaxima || '?' }}</mat-hint>
-          </mat-form-field>
+            <!-- Campo 2: Quantidade de Números -->
+            <!-- Este campo define quantos números serão sorteados -->
+            <mat-form-field appearance="outline" class="quantidade-field">
+              <mat-label>Quantidade de números a gerar</mat-label>
+              <!-- Input com valor mínimo 1 e máximo dinâmico -->
+              <input 
+                matInput 
+                type="number" 
+                [(ngModel)]="quantidadeNumeros" 
+                name="quantidade"
+                min="1"
+                [max]="quantidadeMaxima ?? null"
+                required
+                placeholder="Digite a quantidade de números"
+                [disabled]="!quantidadeMaxima">
+              <mat-icon matSuffix>format_list_numbered</mat-icon>
+              <!-- Mensagem de ajuda dinâmica que usa o valor máximo atual -->
+              <mat-hint>Digite um número entre 1 e {{ quantidadeMaxima || '?' }}</mat-hint>
+            </mat-form-field>
+          </div>
 
           <!-- Botão de Submissão -->
           <!-- A cor do botão (primary) e outros estilos são definidos no SCSS -->
