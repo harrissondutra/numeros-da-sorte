@@ -2,6 +2,11 @@
 
 Uma aplicação web moderna desenvolvida com Angular 17 para gerar números aleatórios únicos. Perfeita para jogos de loteria, sorteios ou qualquer situação que necessite de números aleatórios não repetidos.
 
+## 🌐 Demo Online
+
+**Experimente agora!** A aplicação está disponível em:  
+[https://loteriasistudo.netlify.app/](https://loteriasistudo.netlify.app/)
+
 ## ✨ Funcionalidades
 
 - 🔢 Geração de números aleatórios únicos
