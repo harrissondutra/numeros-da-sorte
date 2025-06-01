@@ -58,6 +58,62 @@
             margin-bottom: 2.5rem;
           }
 
+          // Container dos botões
+          .buttons-container {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+
+            button {
+              padding: 0.75rem;
+              font-size: 1.1rem;
+              border-radius: 10px !important;
+
+              @media (max-width: 480px) {
+                max-width: 100%;
+              }
+
+              mat-icon {
+                margin-right: 0.5rem;
+              }
+            }
+
+            // Botão Gerar (maior)
+            .gerar-button {
+              flex: 3;
+              max-width: 200px;
+              background-color: #209869;
+              color: white;
+              
+              &:hover:not(:disabled) {
+                background-color: #1b805a;
+              }
+
+              &:disabled {
+                background-color: rgba(0, 0, 0, 0.12);
+                color: rgba(0, 0, 0, 0.38);
+              }
+            }
+
+            // Botão Limpar (menor)
+            .limpar-button {
+              flex: 2;
+              max-width: 133px; // 2/3 de 200px
+              border: 2px solid #209869;
+              color: #209869;
+
+              &:hover:not(:disabled) {
+                background-color: rgba(32, 152, 105, 0.04);
+              }
+
+              &:disabled {
+                border-color: rgba(0, 0, 0, 0.12);
+                color: rgba(0, 0, 0, 0.38);
+              }
+            }
+          }
+
           // Campo de quantidade
           .quantidade-field {
             width: 100%;
@@ -177,27 +233,6 @@
                 overflow: hidden;
                 text-overflow: ellipsis; // Adiciona ... caso o texto seja muito longo
               }
-            }
-          }
-
-          // Botão de gerar
-          .gerar-button {
-            background-color: #209869;
-            color: white;
-            // Espaçamento interno do botão
-            // Ajuste este valor para aumentar/diminuir o tamanho do botão
-            padding: 1rem;
-            font-size: 1.1rem;
-            width: 100%;
-            max-width: 200px;
-            margin: 0 auto;
-            
-            @media (max-width: 480px) {
-              max-width: 100%;
-            }
-            
-            &:hover {
-              background-color: #1b805a;
             }
           }
         }

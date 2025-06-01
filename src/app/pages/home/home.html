@@ -63,16 +63,29 @@
             </mat-form-field>
           </div>
 
-          <!-- Botão de Submissão -->
-          <!-- A cor do botão (primary) e outros estilos são definidos no SCSS -->
-          <button 
-            mat-raised-button 
-            color="primary" 
-            type="submit"
-            class="gerar-button"
-            [disabled]="!quantidadeMaxima || !quantidadeNumeros">
-            Gerar Números
-          </button>
+          <!-- Container para os botões -->
+          <div class="buttons-container">
+            <!-- Botão Gerar -->
+            <button 
+              mat-raised-button 
+              color="primary" 
+              type="submit"
+              class="gerar-button"
+              [disabled]="!quantidadeMaxima || !quantidadeNumeros">
+              Gerar Números
+            </button>
+
+            <!-- Botão Limpar -->
+            <button 
+              mat-stroked-button 
+              type="button"
+              class="limpar-button"
+              [disabled]="!quantidadeMaxima && !quantidadeNumeros"
+              (click)="limparCampos()">
+              <mat-icon>clear</mat-icon>
+              Limpar
+            </button>
+          </div>
         </form>
       </mat-card-content>
     </mat-card>

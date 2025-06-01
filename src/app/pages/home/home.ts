@@ -32,18 +32,24 @@ export class HomeComponent {
   // Quantidade inicial de números a serem gerados
   quantidadeNumeros: number | null = null;
 
-  // Função chamada quando o usuário clica em "Gerar Números"
-  gerarNumeros() {
-    if (this.quantidadeMaxima && this.quantidadeNumeros) {
-      console.log(`Gerando ${this.quantidadeNumeros} números até o número ${this.quantidadeMaxima}...`);
-    }
+  // Função para limpar os campos do formulário
+  limparCampos() {
+    this.quantidadeMaxima = null;
+    this.quantidadeNumeros = null;
   }
 
-  // Função chamada sempre que o usuário altera o número máximo
+  // Função chamada quando o usuário altera o número máximo
   onQuantidadeMaximaChange() {
     // Se a quantidade atual for maior que o novo máximo, ajusta para o máximo
     if (this.quantidadeNumeros && this.quantidadeMaxima && this.quantidadeNumeros > this.quantidadeMaxima) {
       this.quantidadeNumeros = this.quantidadeMaxima;
+    }
+  }
+
+  // Função chamada quando o usuário clica em "Gerar Números"
+  gerarNumeros() {
+    if (this.quantidadeMaxima && this.quantidadeNumeros) {
+      console.log(`Gerando ${this.quantidadeNumeros} números até o número ${this.quantidadeMaxima}...`);
     }
   }
 }
