@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { ToolbarComponent } from '../../components/toolbar/toolbar';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -13,6 +14,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
   selector: 'app-home',
   standalone: true,
   imports: [
+    CommonModule,
     ToolbarComponent, 
     MatCardModule,
     MatFormFieldModule,

@@ -86,19 +86,25 @@
       </mat-card-content>
     </mat-card>
 
-    <!-- Card 2 - Dicas e Estratégias -->
-    <!-- Este card ocupa 2/3 da tela (definido no SCSS como flex: 2) -->
+    <!-- Card 2 - Números Gerados -->
     <mat-card class="content-card">
       <mat-card-header>
-        <!-- Altere os títulos abaixo conforme necessário -->
-        <mat-card-title>Dicas e Estratégias</mat-card-title>
-        <mat-card-subtitle>Maximize suas chances</mat-card-subtitle>
+        <mat-card-title>Seus Números da Sorte</mat-card-title>
+        <mat-card-subtitle>Boa sorte!</mat-card-subtitle>
       </mat-card-header>
+      
       <mat-card-content>
-        <!-- Altere os textos abaixo conforme necessário -->
-        <p>Descubra as melhores estratégias para suas apostas!</p>
-        <p>Nosso sistema oferece análises detalhadas dos números mais e menos sorteados, permitindo que você faça escolhas mais informadas.</p>
-        <p>Acompanhe estatísticas em tempo real e histórico completo dos sorteios anteriores.</p>
+        <div class="numeros-container" *ngIf="numerosGerados && numerosGerados.length > 0">
+          <div class="numero-circulo" *ngFor="let numero of numerosGerados">
+            {{ numero }}
+          </div>
+        </div>
+
+        <div class="mensagem-inicial" *ngIf="!numerosGerados || numerosGerados.length === 0">
+          <mat-icon>casino</mat-icon>
+          <p>Configure e gere seus números da sorte!</p>
+          <p>Os números aparecerão aqui.</p>
+        </div>
       </mat-card-content>
     </mat-card>
   </div>
