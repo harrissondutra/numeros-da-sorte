@@ -2,80 +2,68 @@
 <div class="home-container">
   <div class="cards-container">
     <!-- Card 1 - Formulário de Configuração -->
-    <!-- Este card ocupa 1/3 da tela (definido no SCSS como flex: 1) -->
     <mat-card class="content-card">
-      <!-- Cabeçalho do Card -->
       <mat-card-header>
-        <!-- O título vem da variável 'title' no componente -->
-        <mat-card-title> Gerador de números</mat-card-title>
-
+        <mat-card-title>Gerador de números</mat-card-title>
       </mat-card-header>
 
       <mat-card-content>
-        <!-- Textos introdutórios - Altere conforme necessário -->
         <p>Bem-vindo ao sistema Números da Sorte!</p>
         <p>Configure seu sorteio:</p>
 
         <!-- Formulário de Configuração -->
-        <!-- O evento (ngSubmit) chama a função gerarNumeros() quando o formulário é enviado -->
         <form (ngSubmit)="gerarNumeros()" class="numeros-form">
-          <!-- Container para os campos do formulário -->
           <div class="form-fields-container">
             <!-- Campo 1: Quantidade de Números -->
             <mat-form-field appearance="outline" class="quantidade-field">
               <mat-label>Quantidade de números a gerar</mat-label>
-              <!-- Input com valor mínimo 1 -->
               <input 
                 matInput 
                 type="number" 
-                [(ngModel)]="quantidadeNumeros" 
+                [ngModel]="quantidadeNumeros()"
+                (ngModelChange)="quantidadeNumeros.set($event)"
                 name="quantidade"
                 min="1"
                 required
                 placeholder="Digite a quantidade de números">
-              <mat-icon matSuffix>format_list_numbered</mat-icon>
-              <!-- Mensagem de ajuda dinâmica que usa o valor máximo atual -->
+              <mat-icon matSuffix>123</mat-icon>
               <mat-hint>Quantidade de números que deseja gerar</mat-hint>
             </mat-form-field>
 
             <!-- Campo 2: Número Máximo -->
-            <!-- O appearance="outline" cria a borda ao redor do campo -->
-            <!-- O mat-label flutuará para cima quando o campo for focado ou preenchido -->
             <mat-form-field appearance="outline" class="quantidade-field">
               <mat-label>Número máximo permitido</mat-label>
-              <!-- Input com valor mínimo 1 -->
               <input 
                 matInput 
                 type="number" 
-                [(ngModel)]="quantidadeMaxima" 
+                [ngModel]="quantidadeMaxima()"
+                (ngModelChange)="quantidadeMaxima.set($event)"
                 name="maximo"
                 min="1"
                 required
                 placeholder="Digite o número máximo">
-              <mat-icon matSuffix>casino</mat-icon>
-              <!-- Altere a mensagem de ajuda abaixo conforme necessário -->
+              <mat-icon matSuffix>123</mat-icon>
               <mat-hint>Maior número que pode ser sorteado (ex: 60 para Mega-Sena)</mat-hint>
             </mat-form-field>
           </div>
 
           <!-- Container para os botões -->
           <div class="buttons-container">
-            <!-- Botão Gerar -->
             <button 
               mat-raised-button 
               color="primary" 
               type="submit"
               class="gerar-button"
-              [disabled]="!quantidadeMaxima || !quantidadeNumeros">
+              [disabled]="!quantidadeMaxima() || !quantidadeNumeros()">
+              <mat-icon>forward_media</mat-icon>
               Gerar Números
             </button>
 
-            <!-- Botão Limpar -->
             <button 
               mat-stroked-button 
               type="button"
               class="limpar-button"
-              [disabled]="!quantidadeMaxima && !quantidadeNumeros"
+              [disabled]="!quantidadeMaxima() && !quantidadeNumeros() && numerosGerados().length === 0"
               (click)="limparCampos()">
               <mat-icon>clear</mat-icon>
               Limpar
@@ -91,44 +79,45 @@
         <div class="header-content">
           <div class="title-container">
             <mat-card-title>Seus Números da Sorte</mat-card-title>
-            <button 
-              mat-stroked-button 
-              color="primary" 
-              class="copiar-button"
-              [disabled]="!numerosGerados || numerosGerados.length === 0"
-              (click)="copiarNumeros()">
-              <mat-icon>content_copy</mat-icon>
-              Copiar números
-            </button>
+            @if (numerosGerados().length > 0) {
+              <button 
+                mat-stroked-button 
+                color="primary" 
+                class="copiar-button"
+                (click)="copiarNumeros()">
+                <mat-icon>content_copy</mat-icon>
+                Copiar números
+              </button>
+            }
           </div>
           <mat-card-subtitle>Boa sorte!</mat-card-subtitle>
         </div>
       </mat-card-header>
       
       <mat-card-content>
-        <div class="numeros-container" *ngIf="numerosGerados && numerosGerados.length > 0">
-          <div class="numero-circulo" *ngFor="let numero of numerosGerados">
-            {{ numero }}
+        @if (numerosGerados().length > 0) {
+          <div class="numeros-container">
+            @for (numero of numerosGerados(); track numero) {
+              <div class="numero-circulo">{{ numero }}</div>
+            }
+            <div class="copiar-container">
+              <button 
+                mat-stroked-button 
+                color="primary" 
+                class="copiar-button"
+                (click)="copiarNumeros()">
+                <mat-icon>content_copy</mat-icon>
+                Copiar números
+              </button>
+            </div>
           </div>
-
-          <!-- Botão de copiar -->
-          <div class="copiar-container">
-            <button 
-              mat-stroked-button 
-              color="primary" 
-              class="copiar-button"
-              (click)="copiarNumeros()">
-              <mat-icon>content_copy</mat-icon>
-              Copiar números
-            </button>
+        } @else {
+          <div class="mensagem-inicial">
+            <mat-icon>casino</mat-icon>
+            <p>Configure e gere seus números da sorte!</p>
+            <p>Os números aparecerão aqui.</p>
           </div>
-        </div>
-
-        <div class="mensagem-inicial" *ngIf="!numerosGerados || numerosGerados.length === 0">
-          <mat-icon>casino</mat-icon>
-          <p>Configure e gere seus números da sorte!</p>
-          <p>Os números aparecerão aqui.</p>
-        </div>
+        }
       </mat-card-content>
     </mat-card>
   </div>

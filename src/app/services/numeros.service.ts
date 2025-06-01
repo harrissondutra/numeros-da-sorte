@@ -4,35 +4,81 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class NumerosService {
-  constructor() { }
+  // Cache para números já gerados
+  private cache = new Map<string, number[]>();
 
   /**
    * Gera uma lista de números aleatórios únicos
    * @param quantidade Quantidade de números a serem gerados
-   * @param maximo Número máximo permitido (inclusive)
-   * @returns Array com os números gerados, ordenados crescentemente
+   * @param maximo Número máximo que pode ser gerado
+   * @returns Array de números aleatórios únicos
    */
   gerarNumerosAleatorios(quantidade: number, maximo: number): number[] {
     // Validações
-    if (quantidade <= 0 || maximo <= 0) {
-      throw new Error('Quantidade e máximo devem ser maiores que zero');
+    this.validarParametros(quantidade, maximo);
+
+    // Chave para o cache
+    const cacheKey = `${quantidade}-${maximo}`;
+
+    // Verifica se já existe no cache
+    const cachedResult = this.cache.get(cacheKey);
+    if (cachedResult) {
+      // Retorna uma cópia do array para evitar mutações
+      return [...cachedResult];
+    }
+
+    // Gera os números
+    const numeros = this.gerarNumeros(quantidade, maximo);
+
+    // Armazena no cache
+    this.cache.set(cacheKey, [...numeros]);
+
+    return numeros;
+  }
+
+  /**
+   * Valida os parâmetros de entrada
+   * @param quantidade Quantidade de números a serem gerados
+   * @param maximo Número máximo que pode ser gerado
+   */
+  private validarParametros(quantidade: number, maximo: number): void {
+    if (!Number.isInteger(quantidade) || quantidade < 1) {
+      throw new Error('A quantidade deve ser um número inteiro maior que zero');
+    }
+
+    if (!Number.isInteger(maximo) || maximo < 1) {
+      throw new Error('O número máximo deve ser um número inteiro maior que zero');
     }
 
     if (quantidade > maximo) {
       throw new Error('A quantidade não pode ser maior que o número máximo');
     }
+  }
 
-    // Cria um Set para garantir números únicos
-    const numerosGerados = new Set<number>();
+  /**
+   * Gera os números aleatórios usando o algoritmo Fisher-Yates
+   * @param quantidade Quantidade de números a serem gerados
+   * @param maximo Número máximo que pode ser gerado
+   * @returns Array de números aleatórios únicos
+   */
+  private gerarNumeros(quantidade: number, maximo: number): number[] {
+    // Cria um array com todos os números possíveis
+    const numeros = Array.from({ length: maximo }, (_, i) => i + 1);
 
-    // Gera números até atingir a quantidade desejada
-    while (numerosGerados.size < quantidade) {
-      // Gera um número aleatório entre 1 e máximo (inclusive)
-      const numero = Math.floor(Math.random() * maximo) + 1;
-      numerosGerados.add(numero);
+    // Embaralha o array usando o algoritmo Fisher-Yates
+    for (let i = numeros.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [numeros[i], numeros[j]] = [numeros[j], numeros[i]];
     }
 
-    // Converte o Set para Array e ordena
-    return Array.from(numerosGerados).sort((a, b) => a - b);
+    // Retorna apenas a quantidade solicitada
+    return numeros.slice(0, quantidade);
+  }
+
+  /**
+   * Limpa o cache de números gerados
+   */
+  limparCache(): void {
+    this.cache.clear();
   }
 } 

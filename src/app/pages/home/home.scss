@@ -1,7 +1,8 @@
 // Variáveis para cores e medidas comuns
-$primary: #209869;
-$primary-hover: #1b805a;
-$primary-light: rgba(32, 152, 105, 0.04);
+$primary: #0065B7;
+$primary-hover: darken(#0065B7, 10%);
+$primary-light: rgba(0, 101, 183, 0.04);
+$snackbar-success: #209869;
 $disabled: rgba(0, 0, 0, 0.12);
 $disabled-text: rgba(0, 0, 0, 0.38);
 
@@ -482,7 +483,7 @@ $disabled-text: rgba(0, 0, 0, 0.38);
   }
 
   .success-snackbar .mdc-snackbar__surface {
-    background-color: $primary !important;
+    background-color: $snackbar-success !important;
   }
 
   .error-snackbar .mdc-snackbar__surface {

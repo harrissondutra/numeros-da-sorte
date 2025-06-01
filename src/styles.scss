@@ -1,6 +1,47 @@
 /* You can add global styles to this file, and also import other style files */
 
 @use '@angular/material' as mat;
+@use 'sass:map';
+
+// Define a paleta de cores personalizada
+$custom-primary: (
+  50: lighten(#0065B7, 40%),
+  100: lighten(#0065B7, 30%),
+  200: lighten(#0065B7, 20%),
+  300: lighten(#0065B7, 10%),
+  400: lighten(#0065B7, 5%),
+  500: #0065B7,
+  600: darken(#0065B7, 5%),
+  700: darken(#0065B7, 10%),
+  800: darken(#0065B7, 20%),
+  900: darken(#0065B7, 30%),
+  contrast: (
+    50: rgba(black, 0.87),
+    100: rgba(black, 0.87),
+    200: rgba(black, 0.87),
+    300: white,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+  )
+);
+
+// Cria o tema personalizado
+$theme: mat.define-light-theme((
+  color: (
+    primary: mat.define-palette($custom-primary),
+    accent: mat.define-palette(mat.$blue-grey-palette),
+    warn: mat.define-palette(mat.$red-palette),
+  ),
+  typography: mat.define-typography-config(),
+  density: 0,
+));
+
+// Aplica o tema
+@include mat.all-component-themes($theme);
 
 html, body {
   height: 100%;
