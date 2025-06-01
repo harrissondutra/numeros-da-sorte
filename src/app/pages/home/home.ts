@@ -11,6 +11,7 @@ import { NumerosService } from '../../services/numeros.service';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-home',
@@ -43,11 +44,23 @@ export class HomeComponent {
   // Array com os números gerados
   numerosGerados: number[] = [];
 
+  // Flag para dispositivo móvel
+  isMobile = false;
+
   constructor(
     private numerosService: NumerosService,
     private snackBar: MatSnackBar,
-    private clipboard: Clipboard
-  ) {}
+    private clipboard: Clipboard,
+    private breakpointObserver: BreakpointObserver
+  ) {
+    // Observa mudanças no tamanho da tela
+    this.breakpointObserver.observe([
+      Breakpoints.HandsetPortrait,
+      Breakpoints.TabletPortrait
+    ]).subscribe(result => {
+      this.isMobile = result.matches;
+    });
+  }
 
   // Função para limpar os campos do formulário
   limparCampos() {
@@ -56,18 +69,22 @@ export class HomeComponent {
     this.numerosGerados = [];
   }
 
+  // Função para mostrar o SnackBar
+  private showSnackBar(message: string, isError = false) {
+    this.snackBar.open(message, '', {
+      duration: isError ? 5000 : 3000,
+      horizontalPosition: 'left',
+      verticalPosition: this.isMobile ? 'top' : 'bottom',
+      panelClass: [isError ? 'error-snackbar' : 'success-snackbar']
+    });
+  }
+
   // Função para copiar os números para a área de transferência
   copiarNumeros() {
     if (this.numerosGerados.length > 0) {
       const numerosTexto = this.numerosGerados.join(', ');
       this.clipboard.copy(numerosTexto);
-      
-      this.snackBar.open('Números copiados para a área de transferência!', '', {
-        duration: 3000,
-        horizontalPosition: 'left',
-        verticalPosition: 'bottom',
-        panelClass: ['success-snackbar']
-      });
+      this.showSnackBar('Números copiados para a área de transferência!');
     }
   }
 
@@ -80,21 +97,9 @@ export class HomeComponent {
           this.quantidadeMaxima
         );
         
-        // Exibe mensagem de sucesso sem botão de fechar
-        this.snackBar.open('Números gerados com sucesso!', '', {
-          duration: 3000,
-          horizontalPosition: 'left',
-          verticalPosition: 'bottom',
-          panelClass: ['success-snackbar']
-        });
+        this.showSnackBar('Números gerados com sucesso!');
       } catch (erro: any) {
-        // Exibe mensagem de erro sem botão de fechar
-        this.snackBar.open(erro.message, '', {
-          duration: 5000,
-          horizontalPosition: 'left',
-          verticalPosition: 'bottom',
-          panelClass: ['error-snackbar']
-        });
+        this.showSnackBar(erro.message, true);
       }
     }
   }

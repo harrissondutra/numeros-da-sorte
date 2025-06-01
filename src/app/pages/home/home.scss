@@ -445,14 +445,35 @@ $disabled-text: rgba(0, 0, 0, 0.38);
 // Estilos globais para o SnackBar
 ::ng-deep {
   .mdc-snackbar {
-    // Move para o canto inferior esquerdo
-    margin-left: 24px !important;
-    margin-bottom: 24px !important;
+    @media (min-width: 769px) {
+      // Em desktop, mantém no canto inferior esquerdo
+      margin-left: 24px !important;
+      margin-bottom: 24px !important;
+    }
+
+    @media (max-width: 768px) {
+      // Em mobile, posiciona no topo
+      margin: 0 !important;
+      top: 0 !important;
+      left: 0 !important;
+      right: 0 !important;
+      bottom: auto !important;
+      width: 100% !important;
+    }
 
     &__surface {
-      padding: 6px 16px !important;
-      border-radius: 4px !important;
-      box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2) !important;
+      @media (min-width: 769px) {
+        padding: 6px 16px !important;
+        border-radius: 4px !important;
+        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2) !important;
+      }
+
+      @media (max-width: 768px) {
+        padding: 14px 16px !important;
+        border-radius: 0 !important;
+        width: 100% !important;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+      }
     }
 
     &__label {
@@ -460,14 +481,29 @@ $disabled-text: rgba(0, 0, 0, 0.38);
       white-space: nowrap !important;
       padding: 8px 0 !important;
       font-size: 14px !important;
+      text-align: center !important;
+
+      @media (max-width: 768px) {
+        width: 100% !important;
+        display: block !important;
+      }
     }
   }
 
   .success-snackbar, .error-snackbar {
     .mdc-snackbar__surface {
-      padding: 6px 16px !important;
-      border-radius: 4px !important;
-      box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2) !important;
+      @media (min-width: 769px) {
+        padding: 6px 16px !important;
+        border-radius: 4px !important;
+        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2) !important;
+      }
+
+      @media (max-width: 768px) {
+        padding: 14px 16px !important;
+        border-radius: 0 !important;
+        width: 100% !important;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+      }
     }
 
     .mdc-snackbar__label {
@@ -475,6 +511,12 @@ $disabled-text: rgba(0, 0, 0, 0.38);
       white-space: nowrap !important;
       padding: 8px 0 !important;
       font-size: 14px !important;
+      text-align: center !important;
+
+      @media (max-width: 768px) {
+        width: 100% !important;
+        display: block !important;
+      }
     }
   }
 
