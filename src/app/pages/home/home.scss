@@ -64,14 +64,35 @@
 
             // Personalização das cores do mat-form-field
             ::ng-deep {
-              // Reduz a altura do campo
+              // Reduz a altura do campo e adiciona border-radius
               .mat-mdc-text-field-wrapper {
                 height: 48px;
+                border-radius: 5px;
+                overflow: hidden;
+              }
+
+              // Ajusta o border-radius do outline
+              .mdc-notched-outline .mdc-notched-outline__leading {
+                border-radius: 5px 0 0 5px !important;
+              }
+
+              .mdc-notched-outline .mdc-notched-outline__trailing {
+                border-radius: 0 5px 5px 0 !important;
               }
 
               // Ajusta o padding do input
               .mat-mdc-form-field-flex {
                 height: 48px;
+                align-items: center;
+              }
+
+              // Ajusta o container do input
+              .mat-mdc-form-field-infix {
+                padding-top: 0;
+                padding-bottom: 0;
+                min-height: unset;
+                display: flex;
+                align-items: center;
               }
 
               // Ajusta o tamanho do ícone
@@ -82,36 +103,14 @@
                 align-self: center;
               }
 
-              // Estilo do outline quando não está focado
-              .mdc-notched-outline__leading,
-              .mdc-notched-outline__notch,
-              .mdc-notched-outline__trailing {
-                border-width: 1px !important;
-                border-color: rgba(0, 0, 0, 0.12) !important;
-              }
-
-              // Estilo do outline quando focado
-              .mdc-text-field--focused .mdc-notched-outline__leading,
-              .mdc-text-field--focused .mdc-notched-outline__notch,
-              .mdc-text-field--focused .mdc-notched-outline__trailing {
-                border-width: 2px !important;
-                border-color: #209869 !important;
-              }
-
-              // Estilo do outline quando hover
-              .mdc-text-field:hover .mdc-notched-outline__leading,
-              .mdc-text-field:hover .mdc-notched-outline__notch,
-              .mdc-text-field:hover .mdc-notched-outline__trailing {
-                border-color: rgba(0, 0, 0, 0.38) !important;
-              }
-
               // Estilização do label flutuante
               .mdc-floating-label {
                 top: 50%;
                 transform: translateY(-50%);
+                color: rgba(0, 0, 0, 0.6);
                 
                 &.mdc-floating-label--float-above {
-                  transform: translateY(-130%) scale(0.75);
+                  transform: translateY(-145%) scale(0.75);
                 }
               }
 
@@ -120,12 +119,40 @@
                 color: #209869 !important;
               }
 
+              // Remove a transição padrão do outline
+              .mdc-notched-outline__leading,
+              .mdc-notched-outline__notch,
+              .mdc-notched-outline__trailing {
+                transition: none !important;
+                border-width: 1px !important;
+                border-color: rgba(0, 0, 0, 0.12) !important;
+              }
+
+              // Estilo do outline quando focado (sem transição)
+              .mdc-text-field--focused .mdc-notched-outline__leading,
+              .mdc-text-field--focused .mdc-notched-outline__notch,
+              .mdc-text-field--focused .mdc-notched-outline__trailing {
+                transition: none !important;
+                border-width: 2px !important;
+                border-color: #209869 !important;
+              }
+
+              // Hover em campo não focado
+              .mdc-text-field:not(.mdc-text-field--focused):hover .mdc-notched-outline__leading,
+              .mdc-text-field:not(.mdc-text-field--focused):hover .mdc-notched-outline__notch,
+              .mdc-text-field:not(.mdc-text-field--focused):hover .mdc-notched-outline__trailing {
+                transition: none !important;
+                border-color: rgba(0, 0, 0, 0.38) !important;
+              }
+
               // Ajusta o input
               .mdc-text-field__input {
                 height: 48px;
                 padding: 0 16px !important;
                 margin: 0 !important;
                 caret-color: #209869;
+                display: flex;
+                align-items: center;
               }
 
               // Remove o padding extra do hint
