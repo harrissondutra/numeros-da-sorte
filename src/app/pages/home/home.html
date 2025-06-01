@@ -1,0 +1,91 @@
+<app-toolbar></app-toolbar>
+<div class="home-container">
+  <div class="cards-container">
+    <!-- Card 1 - Formulário de Configuração -->
+    <!-- Este card ocupa 1/3 da tela (definido no SCSS como flex: 1) -->
+    <mat-card class="content-card">
+      <!-- Cabeçalho do Card -->
+      <mat-card-header>
+        <!-- O título vem da variável 'title' no componente -->
+        <mat-card-title>{{ title }}</mat-card-title>
+        <!-- Altere o subtítulo abaixo conforme necessário -->
+        <mat-card-subtitle>Gere seus números da sorte</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <!-- Textos introdutórios - Altere conforme necessário -->
+        <p>Bem-vindo ao sistema Números da Sorte!</p>
+        <p>Configure seu sorteio:</p>
+
+        <!-- Formulário de Configuração -->
+        <!-- O evento (ngSubmit) chama a função gerarNumeros() quando o formulário é enviado -->
+        <form (ngSubmit)="gerarNumeros()" class="numeros-form">
+          <!-- Campo 1: Número Máximo -->
+          <!-- O appearance="outline" cria a borda ao redor do campo -->
+          <!-- O mat-label flutuará para cima quando o campo for focado ou preenchido -->
+          <mat-form-field appearance="outline" class="quantidade-field">
+            <mat-label>Número máximo permitido</mat-label>
+            <!-- Input com valor mínimo 1 -->
+            <input 
+              matInput 
+              type="number" 
+              [(ngModel)]="quantidadeMaxima" 
+              name="maximo"
+              min="1"
+              required
+              placeholder="Digite o número máximo"
+              (ngModelChange)="onQuantidadeMaximaChange()">
+            <!-- Altere a mensagem de ajuda abaixo conforme necessário -->
+            <mat-hint>Maior número que pode ser sorteado (ex: 60 para Mega-Sena)</mat-hint>
+          </mat-form-field>
+
+          <!-- Campo 2: Quantidade de Números -->
+          <!-- Este campo define quantos números serão sorteados -->
+          <mat-form-field appearance="outline" class="quantidade-field">
+            <mat-label>Quantidade de números a gerar</mat-label>
+            <!-- Input com valor mínimo 1 e máximo dinâmico -->
+            <input 
+              matInput 
+              type="number" 
+              [(ngModel)]="quantidadeNumeros" 
+              name="quantidade"
+              min="1"
+              [max]="quantidadeMaxima ?? null"
+              required
+              placeholder="Digite a quantidade de números"
+              [disabled]="!quantidadeMaxima">
+            <!-- Mensagem de ajuda dinâmica que usa o valor máximo atual -->
+            <mat-hint>Digite um número entre 1 e {{ quantidadeMaxima || '?' }}</mat-hint>
+          </mat-form-field>
+
+          <!-- Botão de Submissão -->
+          <!-- A cor do botão (primary) e outros estilos são definidos no SCSS -->
+          <button 
+            mat-raised-button 
+            color="primary" 
+            type="submit"
+            class="gerar-button"
+            [disabled]="!quantidadeMaxima || !quantidadeNumeros">
+            Gerar Números
+          </button>
+        </form>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Card 2 - Dicas e Estratégias -->
+    <!-- Este card ocupa 2/3 da tela (definido no SCSS como flex: 2) -->
+    <mat-card class="content-card">
+      <mat-card-header>
+        <!-- Altere os títulos abaixo conforme necessário -->
+        <mat-card-title>Dicas e Estratégias</mat-card-title>
+        <mat-card-subtitle>Maximize suas chances</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <!-- Altere os textos abaixo conforme necessário -->
+        <p>Descubra as melhores estratégias para suas apostas!</p>
+        <p>Nosso sistema oferece análises detalhadas dos números mais e menos sorteados, permitindo que você faça escolhas mais informadas.</p>
+        <p>Acompanhe estatísticas em tempo real e histórico completo dos sorteios anteriores.</p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

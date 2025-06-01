@@ -1,0 +1,38 @@
+.toolbar {
+  background-color: #209869;
+  color: white;
+  width: 100%;
+  padding: 1rem 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  .toolbar-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      .logo-icon {
+        /* Personalize o tamanho do ícone alterando os valores abaixo */
+        font-size: 4rem;  /* Controla o tamanho do ícone */
+        width: 4rem;      /* Largura do container do ícone */
+        height: 4rem;     /* Altura do container do ícone */
+        
+        /* Personalize a rotação do ícone alterando o valor de rotate abaixo */
+        // transform: rotate(15deg);
+        
+        /* Personalize a cor do ícone alterando o valor de color abaixo */
+        color: #e0f2e9;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 1.5rem;
+        font-weight: 500;
+      }
+    }
+  }
+}

@@ -1,0 +1,135 @@
+.home-container {
+  padding: 1rem;
+  min-height: calc(100vh - 96px); // 100vh menos a altura da toolbar
+  display: flex;
+  background-color: #f5f5f5;
+
+  .cards-container {
+    display: flex;
+    gap: 1rem;
+    width: 100%;
+    margin: 0 auto;
+    
+    // Estilos comuns para ambos os Material Cards
+    .content-card {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+
+      /* 
+       * Para ajustar a largura dos cards, use a propriedade flex abaixo
+       * flex: 1 -> ocupa uma parte do espaço
+       * flex: 2 -> ocupa duas partes do espaço
+       * flex: 3 -> ocupa três partes do espaço
+       * 
+       * Exemplos de proporções:
+       * Card 1: flex: 1; Card 2: flex: 2; -> Proporção 1/3 e 2/3
+       * Card 1: flex: 1; Card 2: flex: 1; -> Proporção 50% cada (1/2 e 1/2)
+       * Card 1: flex: 2; Card 2: flex: 3; -> Proporção 40% e 60%
+       */
+
+      // Material Card 1 - Card da esquerda
+      &:first-child {
+        flex: 1; // Primeiro card ocupa 1 parte (1/3 da tela)
+
+        // Estilos do formulário
+        .numeros-form {
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+          margin-top: 1.5rem;
+
+          // Campo de quantidade
+          .quantidade-field {
+            width: 100%;
+
+            // Personalização das cores do mat-form-field
+            ::ng-deep {
+              // Cor do outline quando o campo está focado
+              .mdc-text-field--focused .mdc-notched-outline__leading,
+              .mdc-text-field--focused .mdc-notched-outline__notch,
+              .mdc-text-field--focused .mdc-notched-outline__trailing {
+                border-color: #209869 !important;
+              }
+
+              // Estilização do label flutuante
+              .mdc-floating-label {
+                transition: transform 0.2s ease;
+                
+                &.mdc-floating-label--float-above {
+                  transform: translateY(-2.2em) scale(0.75);
+                }
+              }
+
+              // Cor do label quando o campo está focado
+              .mdc-text-field--focused .mdc-floating-label {
+                color: #209869 !important;
+              }
+
+              // Cor do cursor e texto selecionado
+              .mat-mdc-form-field-focus-overlay {
+                background-color: rgba(32, 152, 105, 0.05);
+              }
+
+              // Ajuste do espaçamento do label
+              .mdc-text-field--outlined {
+                .mdc-notched-outline--upgraded .mdc-floating-label--float-above {
+                  transform: translateY(-2.2em) scale(0.75);
+                }
+              }
+            }
+          }
+
+          // Botão de gerar
+          .gerar-button {
+            background-color: #209869;
+            color: white;
+            padding: 0.5rem;
+            font-size: 1.1rem;
+            
+            &:hover {
+              background-color: #1b805a;
+            }
+          }
+        }
+      }
+
+      // Material Card 2 - Card da direita
+      &:last-child {
+        flex: 2; // Segundo card ocupa 2 partes (2/3 da tela)
+      }
+
+      // Cabeçalho do Material Card
+      mat-card-header {
+        padding: 1.5rem 1.5rem 0;
+        
+        mat-card-title {
+          font-size: 2rem;
+          color: #209869;
+          margin-bottom: 0.5rem;
+        }
+
+        mat-card-subtitle {
+          font-size: 1.2rem;
+          color: #666;
+        }
+      }
+
+      // Conteúdo do Material Card
+      mat-card-content {
+        padding: 1.5rem;
+        
+        p {
+          font-size: 1.1rem;
+          line-height: 1.6;
+          color: #333;
+          margin-bottom: 1rem;
+
+          &:last-child {
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+  }
+}
