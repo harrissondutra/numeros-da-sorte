@@ -61,7 +61,7 @@ export class HomeComponent {
           this.quantidadeMaxima
         );
         
-        // Exibe mensagem de sucesso com o novo estilo
+        // Exibe mensagem de sucesso sem botão de fechar
         this.snackBar.open('Números gerados com sucesso!', '', {
           duration: 3000,
           horizontalPosition: 'right',
@@ -69,7 +69,7 @@ export class HomeComponent {
           panelClass: ['success-snackbar']
         });
       } catch (erro: any) {
-        // Exibe mensagem de erro com o estilo de erro
+        // Exibe mensagem de erro sem botão de fechar
         this.snackBar.open(erro.message, '', {
           duration: 5000,
           horizontalPosition: 'right',
