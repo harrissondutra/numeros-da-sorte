@@ -61,18 +61,19 @@ export class HomeComponent {
           this.quantidadeMaxima
         );
         
-        // Exibe mensagem de sucesso
-        this.snackBar.open('Números gerados com sucesso!', 'Fechar', {
+        // Exibe mensagem de sucesso com o novo estilo
+        this.snackBar.open('Números gerados com sucesso!', '', {
           duration: 3000,
-          horizontalPosition: 'center',
-          verticalPosition: 'bottom'
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+          panelClass: ['success-snackbar']
         });
       } catch (erro: any) {
-        // Exibe mensagem de erro
-        this.snackBar.open(erro.message, 'Fechar', {
+        // Exibe mensagem de erro com o estilo de erro
+        this.snackBar.open(erro.message, '', {
           duration: 5000,
-          horizontalPosition: 'center',
-          verticalPosition: 'bottom',
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
           panelClass: ['error-snackbar']
         });
       }

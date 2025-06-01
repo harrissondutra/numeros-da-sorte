@@ -330,3 +330,49 @@
     }
   }
 }
+
+// Estilos globais para o SnackBar
+::ng-deep {
+  .mdc-snackbar {
+    // Posiciona mais abaixo da toolbar
+    margin-top: 120px !important;
+    // Move para o canto direito
+    margin-right: 24px !important;
+  }
+
+  .success-snackbar, .error-snackbar {
+    .mdc-snackbar__surface {
+      min-width: 250px !important;
+      padding: 0 24px !important;
+      height: 48px !important;
+      display: flex !important;
+      align-items: center !important;
+      background-color: #209869 !important;
+      border-radius: 4px !important;
+    }
+
+    .mat-mdc-snack-bar-label {
+      padding: 0 !important;
+      white-space: nowrap !important;
+    }
+
+    .mdc-snackbar__label {
+      padding: 14px 0 !important;
+      white-space: nowrap !important;
+      color: white !important;
+      font-size: 14px !important;
+      line-height: 20px !important;
+      letter-spacing: 0.25px !important;
+    }
+
+    // Remove espaçamentos desnecessários quando não há botão
+    .mat-mdc-snack-bar-actions {
+      display: none !important;
+    }
+  }
+
+  // Mantemos a classe error-snackbar separada apenas para o background vermelho
+  .error-snackbar .mdc-snackbar__surface {
+    background-color: #f44336 !important;
+  }
+}
