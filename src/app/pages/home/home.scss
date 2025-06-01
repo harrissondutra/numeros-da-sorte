@@ -1,3 +1,10 @@
+// Variáveis para cores e medidas comuns
+$primary: #209869;
+$primary-hover: #1b805a;
+$primary-light: rgba(32, 152, 105, 0.04);
+$disabled: rgba(0, 0, 0, 0.12);
+$disabled-text: rgba(0, 0, 0, 0.38);
+
 .home-container {
   // Espaçamento geral da página
   padding: 1rem;
@@ -83,16 +90,16 @@
             .gerar-button {
               flex: 3;
               max-width: 200px;
-              background-color: #209869;
+              background-color: $primary;
               color: white;
               
               &:hover:not(:disabled) {
-                background-color: #1b805a;
+                background-color: $primary-hover;
               }
 
               &:disabled {
-                background-color: rgba(0, 0, 0, 0.12);
-                color: rgba(0, 0, 0, 0.38);
+                background-color: $disabled;
+                color: $disabled-text;
               }
             }
 
@@ -100,16 +107,16 @@
             .limpar-button {
               flex: 2;
               max-width: 133px; // 2/3 de 200px
-              border: 2px solid #209869;
-              color: #209869;
+              border: 2px solid $primary;
+              color: $primary;
 
               &:hover:not(:disabled) {
-                background-color: rgba(32, 152, 105, 0.04);
+                background-color: $primary-light;
               }
 
               &:disabled {
-                border-color: rgba(0, 0, 0, 0.12);
-                color: rgba(0, 0, 0, 0.38);
+                border-color: $disabled;
+                color: $disabled-text;
               }
             }
           }
@@ -169,7 +176,7 @@
 
               // Cor do label quando focado
               .mdc-text-field--focused .mdc-floating-label {
-                color: #209869 !important;
+                color: $primary !important;
 
                 // Mantém o asterisco vermelho mesmo quando focado
                 .mat-mdc-form-field-required-marker {
@@ -191,7 +198,7 @@
               .mdc-text-field--focused .mdc-notched-outline__notch,
               .mdc-text-field--focused .mdc-notched-outline__trailing {
                 border-width: 2px !important;
-                border-color: #209869 !important;
+                border-color: $primary !important;
               }
 
               // Hover em campo não focado
@@ -237,12 +244,18 @@
 
               mat-card-title {
                 margin: 0;
+                font-size: 2rem;
+                color: $primary;
+
+                @media (max-width: 480px) {
+                  font-size: 1.5rem;
+                }
               }
 
               // Estilo do botão de copiar superior
               .copiar-button {
-                color: #209869;
-                border-color: #209869;
+                color: $primary;
+                border-color: $primary;
                 padding: 4px 16px;
                 border-radius: 20px;
                 font-weight: 500;
@@ -259,12 +272,12 @@
                 }
 
                 &:hover:not(:disabled) {
-                  background-color: rgba(32, 152, 105, 0.04);
+                  background-color: $primary-light;
                 }
 
                 &:disabled {
-                  border-color: rgba(0, 0, 0, 0.12);
-                  color: rgba(0, 0, 0, 0.38);
+                  border-color: $disabled;
+                  color: $disabled-text;
                 }
 
                 @media (max-width: 480px) {
@@ -298,7 +311,7 @@
             width: 3.5rem;
             height: 3.5rem;
             border-radius: 50%;
-            background-color: #209869;
+            background-color: $primary;
             color: white;
             font-size: 1.25rem;
             font-weight: 500;
@@ -321,31 +334,6 @@
             display: flex;
             justify-content: center;
             margin-top: 1.5rem;
-
-            .copiar-button {
-              color: #209869;
-              border-color: #209869;
-              padding: 4px 16px;
-              border-radius: 20px;
-              font-weight: 500;
-
-              mat-icon {
-                margin-right: 8px;
-                font-size: 20px;
-                width: 20px;
-                height: 20px;
-                vertical-align: middle;
-              }
-
-              &:hover:not(:disabled) {
-                background-color: rgba(32, 152, 105, 0.04);
-              }
-
-              &:disabled {
-                border-color: rgba(0, 0, 0, 0.12);
-                color: rgba(0, 0, 0, 0.38);
-              }
-            }
           }
         }
 
@@ -381,16 +369,6 @@
       mat-card-header {
         padding: 1.5rem 1.5rem 0;
         
-        mat-card-title {
-          font-size: 2rem;
-          color: #209869;
-          margin-bottom: 0.5rem;
-
-          @media (max-width: 480px) {
-            font-size: 1.5rem;
-          }
-        }
-
         mat-card-subtitle {
           font-size: 1.2rem;
           color: #666;
@@ -430,11 +408,23 @@
     // Move para o canto inferior esquerdo
     margin-left: 24px !important;
     margin-bottom: 24px !important;
+
+    &__surface {
+      padding: 6px 16px !important;
+      border-radius: 4px !important;
+      box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2) !important;
+    }
+
+    &__label {
+      color: white !important;
+      white-space: nowrap !important;
+      padding: 8px 0 !important;
+      font-size: 14px !important;
+    }
   }
 
-  .success-snackbar {
+  .success-snackbar, .error-snackbar {
     .mdc-snackbar__surface {
-      background-color: #209869 !important;
       padding: 6px 16px !important;
       border-radius: 4px !important;
       box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2) !important;
@@ -448,19 +438,11 @@
     }
   }
 
-  .error-snackbar {
-    .mdc-snackbar__surface {
-      background-color: #f44336 !important;
-      padding: 6px 16px !important;
-      border-radius: 4px !important;
-      box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2) !important;
-    }
+  .success-snackbar .mdc-snackbar__surface {
+    background-color: $primary !important;
+  }
 
-    .mdc-snackbar__label {
-      color: white !important;
-      white-space: nowrap !important;
-      padding: 8px 0 !important;
-      font-size: 14px !important;
-    }
+  .error-snackbar .mdc-snackbar__surface {
+    background-color: #f44336 !important;
   }
 }
