@@ -9,6 +9,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { NumerosService } from '../../services/numeros.service';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { Clipboard } from '@angular/cdk/clipboard';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-home',
@@ -22,7 +24,8 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
     MatButtonModule,
     MatIconModule,
     FormsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatTooltipModule
   ],
   templateUrl: './home.html',
   styleUrl: './home.scss'
@@ -42,7 +45,8 @@ export class HomeComponent {
 
   constructor(
     private numerosService: NumerosService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private clipboard: Clipboard
   ) {}
 
   // Função para limpar os campos do formulário
@@ -50,6 +54,21 @@ export class HomeComponent {
     this.quantidadeMaxima = null;
     this.quantidadeNumeros = null;
     this.numerosGerados = [];
+  }
+
+  // Função para copiar os números para a área de transferência
+  copiarNumeros() {
+    if (this.numerosGerados.length > 0) {
+      const numerosTexto = this.numerosGerados.join(', ');
+      this.clipboard.copy(numerosTexto);
+      
+      this.snackBar.open('Números copiados para a área de transferência!', '', {
+        duration: 3000,
+        horizontalPosition: 'left',
+        verticalPosition: 'bottom',
+        panelClass: ['success-snackbar']
+      });
+    }
   }
 
   // Função chamada quando o usuário clica em "Gerar Números"
@@ -64,16 +83,16 @@ export class HomeComponent {
         // Exibe mensagem de sucesso sem botão de fechar
         this.snackBar.open('Números gerados com sucesso!', '', {
           duration: 3000,
-          horizontalPosition: 'right',
-          verticalPosition: 'top',
+          horizontalPosition: 'left',
+          verticalPosition: 'bottom',
           panelClass: ['success-snackbar']
         });
       } catch (erro: any) {
         // Exibe mensagem de erro sem botão de fechar
         this.snackBar.open(erro.message, '', {
           duration: 5000,
-          horizontalPosition: 'right',
-          verticalPosition: 'top',
+          horizontalPosition: 'left',
+          verticalPosition: 'bottom',
           panelClass: ['error-snackbar']
         });
       }

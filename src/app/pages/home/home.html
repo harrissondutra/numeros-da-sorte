@@ -89,14 +89,39 @@
     <!-- Card 2 - Números Gerados -->
     <mat-card class="content-card">
       <mat-card-header>
-        <mat-card-title>Seus Números da Sorte</mat-card-title>
-        <mat-card-subtitle>Boa sorte!</mat-card-subtitle>
+        <div class="header-content">
+          <div class="title-container">
+            <mat-card-title>Seus Números da Sorte</mat-card-title>
+            <button 
+              mat-stroked-button 
+              color="primary" 
+              class="copiar-button"
+              [disabled]="!numerosGerados || numerosGerados.length === 0"
+              (click)="copiarNumeros()">
+              <mat-icon>content_copy</mat-icon>
+              Copiar números
+            </button>
+          </div>
+          <mat-card-subtitle>Boa sorte!</mat-card-subtitle>
+        </div>
       </mat-card-header>
       
       <mat-card-content>
         <div class="numeros-container" *ngIf="numerosGerados && numerosGerados.length > 0">
           <div class="numero-circulo" *ngFor="let numero of numerosGerados">
             {{ numero }}
+          </div>
+
+          <!-- Botão de copiar -->
+          <div class="copiar-container">
+            <button 
+              mat-stroked-button 
+              color="primary" 
+              class="copiar-button"
+              (click)="copiarNumeros()">
+              <mat-icon>content_copy</mat-icon>
+              Copiar números
+            </button>
           </div>
         </div>
 
