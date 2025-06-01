@@ -118,28 +118,19 @@
           .quantidade-field {
             width: 100%;
 
-            // Personalização das cores do mat-form-field
             ::ng-deep {
-              // Reduz a altura do campo e adiciona border-radius
+              // Ajusta o wrapper do campo
               .mat-mdc-text-field-wrapper {
                 height: 48px;
                 border-radius: 5px;
-                overflow: hidden;
+                overflow: visible;
               }
 
-              // Ajusta o border-radius do outline
-              .mdc-notched-outline .mdc-notched-outline__leading {
-                border-radius: 5px 0 0 5px !important;
-              }
-
-              .mdc-notched-outline .mdc-notched-outline__trailing {
-                border-radius: 0 5px 5px 0 !important;
-              }
-
-              // Ajusta o padding do input
+              // Ajusta o container do input
               .mat-mdc-form-field-flex {
                 height: 48px;
                 align-items: center;
+                margin-top: 12px;
               }
 
               // Ajusta o container do input
@@ -151,12 +142,20 @@
                 align-items: center;
               }
 
-              // Ajusta o tamanho do ícone
-              .mat-mdc-form-field-icon-suffix {
-                color: rgba(0, 0, 0, 0.54);
-                font-size: 20px;
-                padding: 0 4px;
-                align-self: center;
+              // Ajusta o input e placeholder
+              .mdc-text-field__input {
+                height: 48px;
+                padding: 0 16px !important;
+                margin: 0 !important;
+                caret-color: #209869;
+                display: flex;
+                align-items: center;
+
+                &::placeholder {
+                  color: rgba(0, 0, 0, 0.6);
+                  vertical-align: middle;
+                  line-height: 48px;
+                }
               }
 
               // Estilização do label flutuante
@@ -166,7 +165,9 @@
                 color: rgba(0, 0, 0, 0.6);
                 
                 &.mdc-floating-label--float-above {
-                  transform: translateY(-145%) scale(0.75);
+                  transform: translateY(-130%) scale(0.75);
+                  background-color: white;
+                  padding: 0 4px;
                 }
               }
 
@@ -201,37 +202,9 @@
                 border-color: rgba(0, 0, 0, 0.38) !important;
               }
 
-              // Ajusta o input
-              .mdc-text-field__input {
-                height: 48px;
-                padding: 0 16px !important;
-                margin: 0 !important;
-                caret-color: #209869;
-                display: flex;
-                align-items: center;
-              }
-
-              // Remove o padding extra do hint
+              // Ajusta o hint
               .mat-mdc-form-field-hint-wrapper {
                 padding: 0;
-              }
-
-              // Estilo do campo quando desabilitado
-              .mdc-text-field--disabled {
-                .mdc-notched-outline__leading,
-                .mdc-notched-outline__notch,
-                .mdc-notched-outline__trailing {
-                  border-color: rgba(0, 0, 0, 0.06) !important;
-                }
-              }
-
-              // Ajuste do tamanho da fonte do hint
-              .mat-mdc-form-field-hint {
-                font-size: 0.75rem; // 12px
-                line-height: 1.2;
-                white-space: nowrap; // Força o texto a ficar em uma linha
-                overflow: hidden;
-                text-overflow: ellipsis; // Adiciona ... caso o texto seja muito longo
               }
             }
           }
