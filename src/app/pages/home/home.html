@@ -94,7 +94,7 @@
       <mat-card-content>
         @if (temNumerosGerados()) {
           <div class="numeros-container">
-            @for (numero of numerosGerados(); track numero) {
+            @for (numero of numerosOrdenados(); track numero) {
               <div class="numero-circulo">{{ numero }}</div>
             }
             <div class="copiar-container">

@@ -58,6 +58,10 @@ export class HomeComponent {
 
   protected readonly temNumerosGerados = computed(() => this.numerosGerados().length > 0);
 
+  protected readonly numerosOrdenados = computed(() => 
+    [...this.numerosGerados()].sort((a, b) => a - b)
+  );
+
   constructor() {
     // Configura o observer de responsividade
     this.setupMobileObserver();
@@ -90,7 +94,7 @@ export class HomeComponent {
   }
 
   protected copiarNumeros(): void {
-    const numeros = this.numerosGerados();
+    const numeros = this.numerosOrdenados();
     if (numeros.length > 0) {
       this.clipboard.copy(numeros.join(', '));
       this.showSnackBar('Números copiados para a área de transferência!');
