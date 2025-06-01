@@ -35,8 +35,7 @@
                 name="maximo"
                 min="1"
                 required
-                placeholder="Digite o número máximo"
-                (ngModelChange)="onQuantidadeMaximaChange()">
+                placeholder="Digite o número máximo">
               <mat-icon matSuffix>casino</mat-icon>
               <!-- Altere a mensagem de ajuda abaixo conforme necessário -->
               <mat-hint>Maior número que pode ser sorteado (ex: 60 para Mega-Sena)</mat-hint>
@@ -53,13 +52,11 @@
                 [(ngModel)]="quantidadeNumeros" 
                 name="quantidade"
                 min="1"
-                [max]="quantidadeMaxima ?? null"
                 required
-                placeholder="Digite a quantidade de números"
-                [disabled]="!quantidadeMaxima">
+                placeholder="Digite a quantidade de números">
               <mat-icon matSuffix>format_list_numbered</mat-icon>
               <!-- Mensagem de ajuda dinâmica que usa o valor máximo atual -->
-              <mat-hint>Digite um número entre 1 e {{ quantidadeMaxima || '?' }}</mat-hint>
+              <mat-hint>Quantidade de números que deseja gerar</mat-hint>
             </mat-form-field>
           </div>
 

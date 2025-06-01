@@ -23,27 +23,19 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './home.scss'
 })
 export class HomeComponent {
-  // Título exibido no topo do card - altere aqui para mudar o título
+  // Título exibido no topo do card
   title = 'Números da Sorte';
   
-  // Quantidade máxima de números que podem ser gerados (sem valor inicial)
+  // Quantidade máxima de números que podem ser gerados
   quantidadeMaxima: number | null = null;
   
-  // Quantidade inicial de números a serem gerados
+  // Quantidade de números a serem gerados
   quantidadeNumeros: number | null = null;
 
   // Função para limpar os campos do formulário
   limparCampos() {
     this.quantidadeMaxima = null;
     this.quantidadeNumeros = null;
-  }
-
-  // Função chamada quando o usuário altera o número máximo
-  onQuantidadeMaximaChange() {
-    // Se a quantidade atual for maior que o novo máximo, ajusta para o máximo
-    if (this.quantidadeNumeros && this.quantidadeMaxima && this.quantidadeNumeros > this.quantidadeMaxima) {
-      this.quantidadeNumeros = this.quantidadeMaxima;
-    }
   }
 
   // Função chamada quando o usuário clica em "Gerar Números"
