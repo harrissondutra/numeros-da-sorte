@@ -334,6 +334,46 @@ $disabled-text: rgba(0, 0, 0, 0.38);
             display: flex;
             justify-content: center;
             margin-top: 1.5rem;
+
+            .copiar-button {
+              color: $primary;
+              border-color: $primary;
+              padding: 4px 16px;
+              border-radius: 20px;
+              font-weight: 500;
+              height: 36px;
+              min-width: auto;
+              margin: 0;
+
+              mat-icon {
+                margin-right: 8px;
+                font-size: 20px;
+                width: 20px;
+                height: 20px;
+                vertical-align: middle;
+              }
+
+              &:hover:not(:disabled) {
+                background-color: $primary-light;
+              }
+
+              &:disabled {
+                border-color: $disabled;
+                color: $disabled-text;
+              }
+
+              @media (max-width: 480px) {
+                padding: 4px 12px;
+                font-size: 13px;
+
+                mat-icon {
+                  margin-right: 4px;
+                  font-size: 18px;
+                  width: 18px;
+                  height: 18px;
+                }
+              }
+            }
           }
         }
 
