@@ -1,7 +1,8 @@
 <app-toolbar></app-toolbar>
+
 <div class="home-container">
   <div class="cards-container">
-    <!-- Card 1 - Formulário de Configuração -->
+    <!-- Card do Formulário -->
     <mat-card class="content-card">
       <mat-card-header>
         <mat-card-title>Gerador de números</mat-card-title>
@@ -11,10 +12,8 @@
         <p>Bem-vindo ao sistema Números da Sorte!</p>
         <p>Configure seu sorteio:</p>
 
-        <!-- Formulário de Configuração -->
         <form (ngSubmit)="gerarNumeros()" class="numeros-form">
           <div class="form-fields-container">
-            <!-- Campo 1: Quantidade de Números -->
             <mat-form-field appearance="outline" class="quantidade-field">
               <mat-label>Quantidade de números a gerar</mat-label>
               <input 
@@ -30,7 +29,6 @@
               <mat-hint>Quantidade de números que deseja gerar</mat-hint>
             </mat-form-field>
 
-            <!-- Campo 2: Número Máximo -->
             <mat-form-field appearance="outline" class="quantidade-field">
               <mat-label>Número máximo permitido</mat-label>
               <input 
@@ -47,14 +45,13 @@
             </mat-form-field>
           </div>
 
-          <!-- Container para os botões -->
           <div class="buttons-container">
             <button 
               mat-raised-button 
               color="primary" 
               type="submit"
               class="gerar-button"
-              [disabled]="!quantidadeMaxima() || !quantidadeNumeros()">
+              [disabled]="!formValido()">
               <mat-icon>forward_media</mat-icon>
               Gerar Números
             </button>
@@ -63,7 +60,7 @@
               mat-stroked-button 
               type="button"
               class="limpar-button"
-              [disabled]="!quantidadeMaxima() && !quantidadeNumeros() && numerosGerados().length === 0"
+              [disabled]="!quantidadeMaxima() && !quantidadeNumeros() && !temNumerosGerados()"
               (click)="limparCampos()">
               <mat-icon>clear</mat-icon>
               Limpar
@@ -73,13 +70,13 @@
       </mat-card-content>
     </mat-card>
 
-    <!-- Card 2 - Números Gerados -->
+    <!-- Card dos Números -->
     <mat-card class="content-card">
       <mat-card-header>
         <div class="header-content">
           <div class="title-container">
             <mat-card-title>Seus Números da Sorte</mat-card-title>
-            @if (numerosGerados().length > 0) {
+            @if (temNumerosGerados()) {
               <button 
                 mat-stroked-button 
                 color="primary" 
@@ -95,7 +92,7 @@
       </mat-card-header>
       
       <mat-card-content>
-        @if (numerosGerados().length > 0) {
+        @if (temNumerosGerados()) {
           <div class="numeros-container">
             @for (numero of numerosGerados(); track numero) {
               <div class="numero-circulo">{{ numero }}</div>
