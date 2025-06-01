@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ToolbarComponent } from '../../components/toolbar/toolbar';
 import { MatCardModule } from '@angular/material/card';
@@ -8,7 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { NumerosService } from '../../services/numeros.service';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarModule, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
@@ -32,6 +32,11 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
   styleUrl: './home.scss'
 })
 export class HomeComponent {
+  private snackBar = inject(MatSnackBar);
+  private numerosService = inject(NumerosService);
+  private clipboard = inject(Clipboard);
+  private breakpointObserver = inject(BreakpointObserver);
+
   // Título exibido no topo do card
   title = 'Números da Sorte';
   
@@ -47,12 +52,7 @@ export class HomeComponent {
   // Flag para dispositivo móvel
   isMobile = false;
 
-  constructor(
-    private numerosService: NumerosService,
-    private snackBar: MatSnackBar,
-    private clipboard: Clipboard,
-    private breakpointObserver: BreakpointObserver
-  ) {
+  constructor() {
     // Observa mudanças no tamanho da tela
     this.breakpointObserver.observe([
       Breakpoints.HandsetPortrait,
@@ -71,12 +71,14 @@ export class HomeComponent {
 
   // Função para mostrar o SnackBar
   private showSnackBar(message: string, isError = false) {
-    this.snackBar.open(message, '', {
+    const config: MatSnackBarConfig = {
       duration: isError ? 5000 : 3000,
-      horizontalPosition: 'left',
-      verticalPosition: this.isMobile ? 'top' : 'bottom',
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
       panelClass: [isError ? 'error-snackbar' : 'success-snackbar']
-    });
+    };
+
+    this.snackBar.open(message, '', config);
   }
 
   // Função para copiar os números para a área de transferência
